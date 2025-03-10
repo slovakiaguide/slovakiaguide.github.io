@@ -1,0 +1,41 @@
+groups:
+  - title: Подготовка
+    items:
+      - slug: preparation
+        icon: 🧳
+      - slug: university_admission
+        icon: 🎓
+      - slug: criminal_record_russia
+        icon: 📜
+  - title: ВНЖ
+    items:
+      - slug: residence_permit_study
+        icon: 🏛
+      - slug: residence_permit_renewal
+        icon: 🔄
+      - slug: residence_permit_work
+        icon: 🏛
+  - title: Финансы
+    items:
+      - slug: financnasprava
+        icon: 🧾
+      - slug: podtverdenie_o_nedoplatkoch
+        icon: 📑
+      - slug: job_search
+        icon: 💼
+  - title: Жизнь
+    items:
+      - slug: transport
+        icon: 🚌
+      - slug: driving_license_exchange
+        icon: 🚗
+      - slug: banks
+        icon: 🏦
+      - slug: mobile
+        icon: 📡
+      - slug: cons_letter_example
+        icon: 📄
+  - title: Сообщество
+    items:
+      - slug: chats
+        icon: 💬

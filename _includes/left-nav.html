@@ -1,0 +1,27 @@
+<nav class="main-nav" id="main-nav">
+  <div class="nav-header">
+    <span class="nav-eyebrow">Содержание гайда</span>
+    <button class="close-nav" aria-label="Закрыть">×</button>
+  </div>
+
+  <div class="nav-eyebrow">Содержание гайда</div>
+
+  {% for group in site.data.nav.groups %}
+  <div class="nav-group">
+    <!-- div class="nav-group__head">
+        <span>{{ group.title }}</span>
+      </div -->
+    <div class="nav-group__items">
+      {% for item in group.items %}
+      {% for pg in site.pages %}
+      {% assign base = pg.path | split: "/" | last | split: "." | first %}
+      {% if base == item.slug %}
+      {% if pg.nav == false %}{% continue %}{% endif %}
+      <a href="{{ pg.url | relative_url }}" class="{% if page.url == pg.url %}active{% endif %}">{{ item.icon }} {{ pg.title }}</a>
+      {% endif %}
+      {% endfor %}
+      {% endfor %}
+    </div>
+  </div>
+  {% endfor %}
+</nav>

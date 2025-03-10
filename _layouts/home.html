@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="ru">
+  {% include head.html %}
+  <body>
+    <div class="site-container page-home">
+      {% include header.html %}
+
+      <main class="home">{{ content }}</main>
+
+      {% include footer.html %}
+    </div>
+
+    <script src="{{ '/assets/js/main.js' | relative_url }}"></script>
+    <script src="{{ '/assets/js/search.js' | relative_url }}"></script>
+  </body>
+</html>

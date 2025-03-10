@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(/bin/ls -la /Users/vp/pro/slovakiaguide.github.io)",
+      "Bash(/bin/ls _pages/ assets/images/)"
+    ]
+  }
+}

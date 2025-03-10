@@ -1,0 +1,19 @@
+{%- assign segments = page.url | remove_first: '/' | split: '/' -%}
+{%- if segments.size > 0 and page.url != '/' -%}
+<nav class="breadcrumbs" aria-label="Хлебные крошки">
+  <a href="/">Главная</a>
+  {%- assign path = '' -%}
+  {%- for segment in segments -%}
+    {%- assign path = path | append: '/' | append: segment -%}
+    {%- assign target = path | append: '/' -%}
+    {%- assign match = site.pages | where: 'permalink', target | first -%}
+    {%- if forloop.last -%}
+      <span class="breadcrumbs-sep">›</span>
+      <span class="breadcrumbs-current">{{ page.title }}</span>
+    {%- elsif match -%}
+      <span class="breadcrumbs-sep">›</span>
+      <a href="{{ target }}">{{ match.title }}</a>
+    {%- endif -%}
+  {%- endfor -%}
+</nav>
+{%- endif -%}

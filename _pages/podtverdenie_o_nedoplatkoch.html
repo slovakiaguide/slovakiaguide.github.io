@@ -1,0 +1,253 @@
+---
+layout: page
+title: Запрос справки из Sociálnej poisťovňe
+description: В этом разделе описаны шаги и советы по запросу справки из Sociálnej poisťovňe
+order: 8
+toc: true
+permalink: /podtverdenie_o_nedoplatkoch/
+---
+
+
+
+<p>Через портал eformulare.socpoist.sk на macOS. Авторизация проходит
+  через мобильное приложение по NFC с картой побыта (BOK + сертификаты KEP). Подпись - с помощью читачки.
+</p>
+
+<h2>Предусловия</h2>
+
+<ol>
+  <li>Физический USB smart-card ридер (Čítačka)</li>
+  <li>Карта побыта с KEP-сертификатом.</li>
+  <li>Установлено приложение eIDENTITA на смартфон</li>
+  <li>Установлены:
+    <ul>
+      <li><code>eID klient</code></li>
+      <li><code>D.Signer/XAdES</code></li>
+      <li>Расширение D.Bridge 2 для Chrome
+        <a
+          href="https://chromewebstore.google.com/detail/dbridge-2/fngbdhimbgbonhlibfmiemipheabfdmj">https://chromewebstore.google.com/detail/dbridge-2/fngbdhimbgbonhlibfmiemipheabfdmj</a>
+      </li>
+    </ul>
+  </li>
+  <li>Сайт открывается только если вы в Словакии (либо у вас словацкий IP-адрес)</li>
+</ol>
+
+<h2>Порядок действий</h2>
+
+<p>Убедиться что eID klient запущен.</p>
+
+<p>Авторизоваться на slovensko.sk. Это можно сделать через мобильное приложение eIDENTITA с помощь NFC-авторизации.
+  Для подписи понадобится читачка.</p>
+
+
+<p>Вставить карту в ридер (чипом вверх) и проверить что она видна системе. (<a
+    href="использование читачки.html">использование
+    читачки.html</a>)</p>
+
+
+<p>Перейти на <a href="https://eformulare.socpoist.sk">https://eformulare.socpoist.sk</a>. На странице
+  выбрать форму «Žiadosť o vydanie potvrdenia o nedoplatkoch na sociálnom poistení» → «Detail služby».</p>
+<p><img width="500" src="/assets/images/podtverdenie_o_nedoplatkoch/01-portal-vyber-formulara.png"
+    alt="Портал eformulare.socpoist.sk, выбор формы">
+</p>
+
+
+<p>На экране «Výber subjektu pre zastupovanie» —
+  выбрать нужный субъект (ИП) и нажать «Prihlásiť sa».</p>
+<p><img width="500" src="/assets/images/podtverdenie_o_nedoplatkoch/02-vyber-subjektu.png"
+    alt="Výber subjektu pre zastupovanie">
+</p>
+
+<p>Проверить данные заявителя (<code>Názov</code>, <code>IČO</code>, <code>DIČ</code>) → нажать «Pokračovať na
+  podpísanie».</p>
+<p><img width="500" src="/assets/images/podtverdenie_o_nedoplatkoch/03-formular-zaiadatel.png"
+    alt="Форма Žiadateľ с заполненными данными"></p>
+
+<p>Следующие шаги нужно выполнит достаточно быстро, чтобы криптографические программы не потеряли сессию. На
+  странице «Podpísanie» нажать «Podpísať formulár».</p>
+<p><img width="500" src="/assets/images/podtverdenie_o_nedoplatkoch/04-podpisanie-formular.png"
+    alt="Шаг Podpísanie с кнопкой Podpísať formulár"></p>
+
+<p>Появится прелоадер «Čakajte prosím...» — идёт запуск D.Signer через D.Launcher.</p>
+<p><img width="500" src="/assets/images/podtverdenie_o_nedoplatkoch/05-cakajte-prosim.png"
+    alt="Прелоадер Čakajte prosím"></p>
+
+<p>D.Launcher 2 спросит подтверждения запуска D.Signer/XAdES Java → «Run».</p>
+<p><img width="500" src="/assets/images/podtverdenie_o_nedoplatkoch/06-dlauncher-run.png"
+    alt="D.Launcher 2 запрашивает запуск D.Signer/XAdES Java">
+</p>
+
+<p>Откроется диалог «Nastavenia spôsobu prístupu k certifikátom». <strong>Нажать зелёную круглую
+    стрелку (refresh)</strong> справа от выпадашки — в поле «Slot» должны появиться:</p>
+<ul>
+  <li><code>#1 ffffffff (Sig_ZEP)</code> — KEP (квалифицированный), <strong>нужен для Sociálnej poisťovne</strong>
+  </li>
+  <li><code>#2 ffffffff (Sig_EP)</code> — обычный электронный подпис</li>
+</ul>
+<strong>Выделить строку <code>#1 Sig_ZEP</code></strong> → кнопка <code>Ďalej</code> станет активной → нажать.
+<p><img width="500" src="/assets/images/podtverdenie_o_nedoplatkoch/08-nastavenia-sig-zep-selected.png"
+    alt="Выбран слот Sig_ZEP, Ďalej активна"></p>
+</li>
+<p>Откроется окно D.Signer/XAdES Java с текстом документа («Žiadosť o vydanie potvrdenia...»).</p>
+<p><img width="500" src="/assets/images/podtverdenie_o_nedoplatkoch/09-dsigner-dokument.png"
+    alt="Окно D.Signer/XAdES Java с документом, статус не подписан"></p>
+
+<p>Нажать <strong><code>Podpísať</code></strong> внизу справа.</p>
+<p>Появится окно «Výber certifikátu» — выбрать сертификат «SVK eID ACA2» → «OK».</p>
+<p><img width="500" src="/assets/images/podtverdenie_o_nedoplatkoch/10-vyber-certifikatu.png"
+    alt="Výber certifikátu — SVK eID ACA2"></p>
+
+<p>Во всплывающем окне ввести шестизначный код.</p>
+<p><img width="500" src="/assets/images/podtverdenie_o_nedoplatkoch/11.png" alt="Zadajte Podpisový PIN — ввод KEP PIN">
+</p>
+
+<p>Статус меняется на зелёный <code>Dokument je podpísaný</code>, кнопка <code>OK</code> становится активной →
+  нажать <code>OK</code>.</p>
+<p>Открывается страница «Sumarizácia a odoslanie» → нажать <code>ODOSLAŤ PODANIE</code>.</p>
+<p><img width="500" src="/assets/images/podtverdenie_o_nedoplatkoch/13.png"
+    alt="Sumarizácia a odoslanie — нажать ODOSLAŤ PODANIE">
+</p>
+
+<p>Появляется диалог подтверждения отправки → нажать <code>Zatvoriť</code>.</p>
+<p><img width="500" src="/assets/images/podtverdenie_o_nedoplatkoch/14.png"
+    alt="Подтверждение: подание отправлено на обработку">
+</p>
+
+<p><strong>Главное — делать всё быстро.</strong> Сессия на портале живёт 10–15 минут, если зависать в D.Signer —
+  умрёт.</p>
+
+<h2>Решение проблем</h2>
+
+<h3>Диагностика ридера и карты</h3>
+
+<p>Советы по диагностике USB smart-card ридера — в отдельном файле:
+  <a href="использование читачки.html">использование читачки.html</a>
+</p>
+
+<h3>Процессы, которые должны быть живы при подписи</h3>
+
+<pre><code>ps aux | grep -iE "eid_klient|d\.signer|d\.launcher|dbridge" | grep -v grep</code></pre>
+
+<p>Ожидаемо видеть:</p>
+
+<ul>
+  <li><code>/Applications/eID_klient.app/Contents/MacOS/eID_Client</code></li>
+  <li><code>D.Launcher 2.app/.../dLauncher2</code></li>
+  <li><code>dBridge2Nm</code> (расширение браузера)</li>
+  <li>Java-процесс <code>sk.ditec.dbridge2.DBridgeServerApp</code> (запускается во время подписи)</li>
+</ul>
+
+
+<h3>Пустой список слотов</h3>
+
+<p><img width="500" src="/assets/images/podtverdenie_o_nedoplatkoch/99-slot-empty-legacy.png"
+    alt="Старый диалог Nastavenia с пустым Slot"></p>
+
+<p>Проблема в том, что программа не видит карту побыта даже после нажатия зеленой круговой стрелки.</p>
+
+<h3>2. Запущен ли eID klient в фоне?</h3>
+
+<pre><code>ps aux | grep -i eID_Client | grep -v grep</code></pre>
+
+<p>Должна быть строка <code>/Applications/eID_klient.app/Contents/MacOS/eID_Client</code>. Если процесса нет — запусти
+  eID klient из Applications (он стоит в автозапуске, но после reboot может ещё не подняться).</p>
+
+<p>Окна у eID klient нет — это нормально.</p>
+
+<h3>3. macOS видит ридер и карту на низком уровне?</h3>
+
+<pre><code>system_profiler SPSmartCardsDataType | head -5</code></pre>
+
+<p>Должен быть виден ридер с ATR карты. Подробно все состояния и что с ними делать —
+  <a href="использование читачки.html">использование читачки.html</a>.
+</p>
+
+<h3>4. Конфликт с системным CCID macOS (самая частая причина на Sonoma/Sequoia)</h3>
+
+<p>Начиная с Ventura macOS сама подхватывает карту через <code>com.apple.CryptoTokenKit.pivtoken</code> и eID klient
+  получает карту «занятой». Лечение:</p>
+
+<pre><code>sudo defaults write /Library/Preferences/com.apple.security.smartcard DisabledTokens -array com.apple.CryptoTokenKit.pivtoken</code></pre>
+
+<p>Перезагрузить мак. После этого eID klient должен получить эксклюзивный доступ.</p>
+
+<h3>7. Кэш/залипший процесс</h3>
+
+<pre><code>ps aux | grep -iE "d\.signer|d\.launcher|eid_klient"</code></pre>
+
+<p>Если что-то висит — убить, перезапустить последовательность с пункта 1 happy path.</p>
+
+<h3>Прелоадер на веб-странице не исчезает после подписания</h3>
+<p>При этом окно D.Signer/XAdES Java зависает (Баг Ditec).</p>
+<p>Сессия на eformulare.socpoist.sk истекает по неактивности минут за 10–15. Если долго возиться с
+  подписанием — сессия умрёт, и даже успешная подпись не дойдёт
+  до веб-страницы.</p>
+
+<p>Поможет перезагрузка компьютера. Все шаги нужно сделать быстро.</p>
+
+
+<p><strong>Симптомы:</strong></p>
+<ul>
+  <li>В окне D.Signer нажал <code>Podpísať</code>, выбрал сертификат, ввёл KEP PIN — всё прошло успешно.</li>
+  <li>Возвращаешься в основное окно D.Signer — оно <strong>висит</strong>, кнопки (<code>OK</code>,
+    <code>Storno</code>) не реагируют.
+  </li>
+  <li>Прелоадер на странице формы крутится бесконечно.</li>
+  <li><code>ps aux</code> показывает Java-процесс с 0% CPU.</li>
+  <li><code>lsof -iTCP -sTCP:LISTEN | grep java</code> пусто — WebSocket-сервер внутри Java мёртв.</li>
+</ul>
+
+<p><strong>Настоящая причина (найдена через <code>sample &lt;pid&gt; 3 -mayDie</code>):</strong></p>
+
+<p>Стек главного Java-потока:</p>
+<pre><code>JVM_Halt → vm_exit → exit → __cxa_finalize_ranges
+  → lib_fini() (in libPkcs11.dylib) + 60
+    → std::thread::join()
+      → _pthread_join  ← висит вечно</code></pre>
+
+<p>Java <strong>корректно завершил подпись</strong> и вызвал <code>System.exit(0)</code>. Но при выходе JVM вызывает
+  финализаторы нативных библиотек, и <code>libPkcs11.dylib</code> от Ditec застревает в <code>lib_fini()</code>: его
+  фоновый поток (для общения со смарт-картой через CryptoTokenKit) не отвечает на shutdown, <code>pthread_join</code>
+  ждёт бесконечно.</p>
+
+<p>Последствие: процесс Java не завершается → stdout-буферы native messaging не флашатся → Chrome не получает ответ →
+  прелоадер.</p>
+
+<p><strong>Почему это происходит именно на Apple Silicon:</strong></p>
+
+<p>JRE, который поставляется с D.Launcher 2, — <strong>Intel-only</strong>
+  (<code>Mach-O 64-bit executable x86_64</code>), идёт через Rosetta 2. Проверить:</p>
+<pre><code>file /Users/user/.ditec/dlauncher2/products/sk.ditec.djre/*/bin/java
+# Mach-O 64-bit executable x86_64</code></pre>
+
+<p><code>libPkcs11.dylib</code> — universal (x86_64+arm64), но раз Java x86_64, грузится именно Intel-слайс. Связка
+  «x86_64 JVM через Rosetta + нативные потоки к CTK» стабильно ловит дедлок в dyld-финализаторах. Это <strong>баг
+    Ditec</strong> — они не поставляют нативный ARM JRE.</p>
+
+<p><strong>Что делать:</strong></p>
+<p>Перезагрузить компьютер, еще раз пройти весь процесс</p>
+
+
+
+
+<h2>Полезные ссылки</h2>
+
+<ul>
+  <li><a href="https://eidas.minv.sk/downloadservice/eidklient/mac/Prirucka_eID_klient.pdf">eID klient — příručka pro
+      macOS (PDF)</a></li>
+  <li><a href="https://www.slovensko.sk/_img/CMS4/Navody/Navod_D.Signer_Mac_OS_X.pdf">Návod D.Signer/XAdES v OS X pre
+      Mac (PDF)</a></li>
+  <li><a href="https://www.slovensko.sk/sk/na-stiahnutie/aplikacie-pre-kvalifikovany-el">Aplikácie pre kvalifikovaný
+      elektronický podpis — slovensko.sk</a></li>
+  <li><a href="https://beta.slovensko.sk/aktivacia-elektronickeho-podpisu-kep">Aktivácia elektronického podpisu
+      (KEP)</a></li>
+  <li><a href="https://www.slovensko.sk/sk/oznamy/detail/_podpisovanie-dokumentov-mobiln">Podpisovanie dokumentov
+      mobilným zariadením</a></li>
+
+  <li>Поисковые запросы для Google:
+    <ul>
+      <li><code>Problem s podpisovanim s KEPom</code></li>
+      <li><code>D.Signer XAdES slot prázdny</code></li>
+    </ul>
+  </li>
+</ul>

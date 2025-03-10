@@ -1,0 +1,28 @@
+---
+permalink: /search.json
+layout: null
+sitemap: false
+---
+[
+{%- assign first = true -%}
+{%- for p in site.pages -%}
+  {%- unless p.title -%}{%- continue -%}{%- endunless -%}
+  {%- if p.nav == false -%}{%- continue -%}{%- endif -%}
+  {%- if p.path contains "_pages/podtverdenie_o_nedoplatkoch/" -%}{%- continue -%}{%- endif -%}
+  {%- assign lines = p.content | newline_to_br | split: "<br />" -%}
+  {%- assign h2_lines = lines | where_exp: "l", "l contains '<h2'" -%}
+  {%- assign h3_lines = lines | where_exp: "l", "l contains '<h3'" -%}
+  {%- capture headings_joined -%}
+    {%- for h in h2_lines -%}{{ h | strip_html | strip_newlines | normalize_whitespace }}|{%- endfor -%}
+    {%- for h in h3_lines -%}{{ h | strip_html | strip_newlines | normalize_whitespace }}|{%- endfor -%}
+  {%- endcapture -%}
+  {%- if first == false -%},{%- endif -%}
+  {%- assign first = false -%}
+  {
+    "title": {{ p.title | strip_html | jsonify }},
+    "url": {{ p.url | relative_url | jsonify }},
+    "headings": {{ headings_joined | split: "|" | jsonify }},
+    "content": {{ p.content | strip_html | strip_newlines | normalize_whitespace | jsonify }}
+  }
+{%- endfor -%}
+]

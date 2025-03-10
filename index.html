@@ -1,0 +1,113 @@
+---
+layout: home
+title: Гайд по переезду в Словакию
+description: Пошаговые инструкции по переезду и адаптации в Словакии
+---
+
+<section class="home-hero">
+  <h1 class="home-hero__title">
+    Гайд<br />
+    по переезду<br />
+    <span class="accent">в Словакию.</span>
+  </h1>
+  <p class="home-hero__lede">
+    Пошаговые инструкции по переезду и адаптации в Словакии.
+  </p>
+</section>
+
+<div class="guide-toc">
+  <ul class="guide-section__list">
+    {% for group in site.data.nav.groups %}
+      {% for item in group.items %}
+        {% for pg in site.pages %}
+          {% assign base = pg.path | split: "/" | last | split: "." | first %}
+          {% if base == item.slug %}
+            {% if pg.nav == false %}{% continue %}{% endif %}
+    <li><a href="{{ pg.url | relative_url }}">{{ item.icon }} {{ pg.title }}</a></li>
+          {% endif %}
+        {% endfor %}
+      {% endfor %}
+    {% endfor %}
+  </ul>
+</div>
+
+<!--
+<div class="guide-toc guide-toc--full">
+
+  <div class="guide-section">
+    <div class="guide-section__head">
+      <span class="guide-section__num">01</span>
+      <h2 class="guide-section__title">Начало</h2>
+    </div>
+    <ul class="guide-section__list">
+      <li><a href="/chats/">💬 Чаты</a></li>
+      <li class="soon">🏡 Поиск жилья</li>
+      <li class="soon">📡 Мобильная связь</li>
+      <li class="soon">💱 Обмен валюты</li>
+      <li class="soon">🧳 Что взять с собой</li>
+    </ul>
+  </div>
+
+  <div class="guide-section">
+    <div class="guide-section__head">
+      <span class="guide-section__num">02</span>
+      <h2 class="guide-section__title">Подготовка к переезду</h2>
+    </div>
+    <ul class="guide-section__list">
+      <li class="soon">🛂 Виза и тип ВНЖ</li>
+      <li class="soon">📜 Документы на апостиль</li>
+      <li class="soon">🎓 Нострификация диплома</li>
+    </ul>
+  </div>
+
+  <div class="guide-section">
+    <div class="guide-section__head">
+      <span class="guide-section__num">03</span>
+      <h2 class="guide-section__title">ВНЖ</h2>
+    </div>
+    <ul class="guide-section__list">
+      <li><a href="/residence_permit_work/">🏛 ВНЖ для работающих (živnosť)</a></li>
+      <li><a href="/residence_permit_renewal/">🔄 Продление ВНЖ</a></li>
+      <li class="soon">📝 Смена основания ВНЖ</li>
+      <li class="soon">🪪 Карта иностранца</li>
+    </ul>
+  </div>
+
+  <div class="guide-section">
+    <div class="guide-section__head">
+      <span class="guide-section__num">04</span>
+      <h2 class="guide-section__title">Финансы</h2>
+    </div>
+    <ul class="guide-section__list">
+      <li><a href="/financnasprava/">🧾 Регистрация на financnasprava.sk</a></li>
+      <li><a href="/job_search/">💼 Поиск работы</a></li>
+      <li class="soon">🏦 Открытие банковского счёта</li>
+      <li class="soon">💸 Налоги для ИП (паушальный налог)</li>
+      <li class="soon">🏥 Социальное страхование</li>
+    </ul>
+  </div>
+
+  <div class="guide-section">
+    <div class="guide-section__head">
+      <span class="guide-section__num">05</span>
+      <h2 class="guide-section__title">Транспорт</h2>
+    </div>
+    <ul class="guide-section__list">
+      <li><a href="/transport/">🚌 Общественный транспорт, поезда, права</a></li>
+    </ul>
+  </div>
+
+  <div class="guide-section">
+    <div class="guide-section__head">
+      <span class="guide-section__num">06</span>
+      <h2 class="guide-section__title">Жизнь в Словакии</h2>
+    </div>
+    <ul class="guide-section__list">
+      <li class="soon">🏥 Медицина и страховка</li>
+      <li class="soon">🏫 Школы и детские сады</li>
+      <li><a href="/cons_letter_example/">📄 Образец письма-согласия</a></li>
+    </ul>
+  </div>
+
+</div>
+-->
