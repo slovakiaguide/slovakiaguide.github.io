@@ -1,0 +1,31 @@
+<nav class="main-nav" id="main-nav">
+  <div class="nav-header">
+    <h2>Содержание</h2>
+    <button class="close-nav" aria-label="Close navigation menu">×</button>
+  </div>
+
+  <ul class="nav-list">
+    <li class="nav-item {% if page.url == '/' %}active{% endif %}">
+      <a href="{{ '/' | relative_url }}">Главная</a>
+    </li>
+
+    {% assign sorted_pages = site.pages | sort: 'order' %} {% for p in
+    sorted_pages %} {% if p.title and p.nav != false %}
+    <li class="nav-item {% if page.url == p.url %}active{% endif %}">
+      <a href="{{ p.url | relative_url }}">{{ p.title }}</a>
+
+      {% if p.subnav %}
+      <ul class="subnav-list">
+        {% for subitem in p.subnav %}
+        <li class="subnav-item">
+          <a href="{{ p.url | relative_url }}#{{ subitem.id }}"
+            >{{ subitem.title }}</a
+          >
+        </li>
+        {% endfor %}
+      </ul>
+      {% endif %}
+    </li>
+    {% endif %} {% endfor %}
+  </ul>
+</nav>

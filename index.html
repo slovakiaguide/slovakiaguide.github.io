@@ -1,0 +1,132 @@
+---
+layout: default
+title: Гайд по переезду в Словакию
+description: Полное руководство по переезду и жизни в Словакии
+---
+
+<div class="home-page">
+  <header class="home-header">
+    <h1>Гайд по переезду в Словакию</h1>
+    <p class="home-description">
+      Полное руководство по переезду и жизни в Словакии
+    </p>
+  </header>
+
+  <section class="home-intro">
+    <h2>О проекте</h2>
+    <p>
+      Добро пожаловать в руководство по переезду в Словакию! Здесь вы найдете
+      всю необходимую информацию о процессе переезда, оформлении документов,
+      поиске жилья, трудоустройстве и многом другом.
+    </p>
+    <p>
+      Этот гайд создан на основе личного опыта и содержит практические советы,
+      которые помогут вам сделать переезд максимально комфортным и безопасным.
+    </p>
+  </section>
+
+  <section class="home-sections">
+    <h2>Разделы гайда</h2>
+    <div class="sections-grid">
+      <div class="section-card">
+        <h3>Подготовка к переезду</h3>
+        <p>Необходимые документы, планирование бюджета, что взять с собой</p>
+        <a href="{{ '/preparation' | relative_url }}" class="section-link"
+          >Подробнее →</a
+        >
+      </div>
+
+      <div class="section-card">
+        <h3>Визы и ВНЖ</h3>
+        <p>Типы виз, процесс получения ВНЖ, необходимые документы</p>
+        <a href="#" class="section-link">Подробнее →</a>
+      </div>
+
+      <div class="section-card">
+        <h3>Жилье</h3>
+        <p>Поиск жилья, аренда квартиры, районы городов</p>
+        <a href="#" class="section-link">Подробнее →</a>
+      </div>
+
+      <div class="section-card">
+        <h3>Работа</h3>
+        <p>Поиск работы, трудоустройство, бизнес в Словакии</p>
+        <a href="#" class="section-link">Подробнее →</a>
+      </div>
+
+      <div class="section-card">
+        <h3>Налоги и финансы</h3>
+        <p>
+          Налоговая система, регистрация на financnasprava.sk, банковские счета
+        </p>
+        <a href="{{ '/financnasprava' | relative_url }}" class="section-link"
+          >Подробнее →</a
+        >
+      </div>
+
+      <div class="section-card">
+        <h3>Медицина</h3>
+        <p>Система здравоохранения, страховка, поиск врачей</p>
+        <a href="#" class="section-link">Подробнее →</a>
+      </div>
+
+      <div class="section-card">
+        <h3>Транспорт</h3>
+        <p>Общественный транспорт, автомобиль, права</p>
+        <a href="#" class="section-link">Подробнее →</a>
+      </div>
+    </div>
+  </section>
+</div>
+
+<style>
+  .home-header {
+    margin-bottom: 2rem;
+    text-align: center;
+  }
+
+  .home-description {
+    font-size: 1.2rem;
+    color: var(--dark-gray);
+  }
+
+  .home-intro {
+    margin-bottom: 3rem;
+  }
+
+  .sections-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.5rem;
+    margin-top: 1.5rem;
+  }
+
+  .section-card {
+    background-color: var(--light-gray);
+    border-radius: 5px;
+    padding: 1.5rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .section-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  }
+
+  .section-card h3 {
+    margin-bottom: 0.75rem;
+  }
+
+  .section-link {
+    display: inline-block;
+    margin-top: 1rem;
+    font-weight: 500;
+  }
+
+  @media (max-width: 768px) {
+    .sections-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

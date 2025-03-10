@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="ru">
+  {% include head.html %}
+  <body>
+    <div class="site-container">
+      {% include header.html %}
+
+      <div class="main-container">
+        <aside class="left-sidebar">{% include left-nav.html %}</aside>
+
+        <main class="main-content">{{ content }}</main>
+
+        {% if page.toc %}
+        <aside class="right-sidebar">{% include toc.html %}</aside>
+        {% endif %}
+      </div>
+
+      {% include footer.html %}
+    </div>
+
+    <script src="{{ '/assets/js/main.js' | relative_url }}"></script>
+  </body>
+</html>

@@ -1,0 +1,34 @@
+title: Slovakia Relocation Guide
+description: Comprehensive guide for relocating to Slovakia
+baseurl: ''
+url: ''
+
+# Build settings
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - node_modules
+  - vendor
+  - .sass-cache
+
+# Custom settings
+permalink: pretty
+encoding: utf-8
+
+# Collections
+collections:
+  pages:
+    output: true
+    permalink: /:basename/
+
+# Default layout for pages
+defaults:
+  - scope:
+      path: ''
+      type: 'pages'
+    values:
+      layout: 'page'
+  - scope:
+      path: ''
+    values:
+      layout: 'default'
