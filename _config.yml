@@ -12,6 +12,8 @@ exclude:
   - .sass-cache
   - docs
   - README.md
+  - CONTRIBUTING.md
+  - .github
   - .claude
 
 # Custom settings
