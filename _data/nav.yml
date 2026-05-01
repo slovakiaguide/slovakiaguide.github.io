@@ -35,6 +35,8 @@ groups:
         icon: 📡
       - slug: cons_letter_example
         icon: 📄
+      - slug: kep_activation
+        icon: ✍️
   - title: Сообщество
     items:
       - slug: chats

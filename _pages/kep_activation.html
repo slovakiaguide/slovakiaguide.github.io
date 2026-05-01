@@ -1,0 +1,237 @@
+---
+layout: page
+title: Черновик - Активация КЭП (квалифицированной электронной подписи)
+description: Как активировать квалифицированную электронную подпись (KEP) на словацкой карте ВНЖ или občiansky preukaz и
+пользоваться ей для подписания документов.
+order: 9
+nav: false
+published: false
+toc: true
+permalink: /kep_activation/
+---
+
+<h2 id="introduction">Что такое КЭП и зачем она нужна</h2>
+<p>
+  <strong>KEP</strong> (<em>kvalifikovaný elektronický podpis</em>) — словацкий
+  аналог квалифицированной электронной подписи. Юридически приравнивается к
+  собственноручной подписи на бумаге и принимается во всех государственных
+  системах ЕС (eIDAS).
+</p>
+
+<p>КЭП на карте ВНЖ или občiansky preukaz нужен, чтобы:</p>
+<ul>
+  <li>подписывать заявления на портале <a href="https://www.slovensko.sk" target="_blank">slovensko.sk</a> (общение с
+    любым ведомством через elektronická schránka);</li>
+  <li>подавать декларации на <a href="https://www.financnasprava.sk" target="_blank">financnasprava.sk</a>;</li>
+  <li>регистрировать ИП (živnosť) онлайн со скидкой на пошлину;</li>
+  <li>подписывать договоры, доверенности и заявления без визита в нотариат и без печати «Apostille».</li>
+</ul>
+
+<div class="note-box">
+  <p>
+    <strong>Кто может получить КЭП.</strong> Любой обладатель словацкой ID-карты
+    с чипом: гражданин Словакии (<em>občiansky preukaz</em> с электронным чипом)
+    либо иностранец с картой ВНЖ нового образца, выпущенной с чипом и
+    BOK-кодом. Если на вашей карте ВНЖ нет чипа (старые карточки до 2022 года)
+    — нужно заменить её в полиции по делам иностранцев.
+  </p>
+</div>
+
+<h2 id="prerequisites">Что нужно подготовить</h2>
+<ol>
+  <li>
+    <strong>ID-карта с чипом</strong> (občiansky preukaz / pobytový preukaz
+    cudzinca с чипом) и <strong>активированный BOK</strong> (6-значный код,
+    выданный или установленный при получении карты).
+  </li>
+  <li>
+    <strong>Картридер</strong> с поддержкой смарт-карт. Подойдут
+    модели, перечисленные на
+    <a href="https://www.slovensko.sk/sk/na-stiahnutie" target="_blank">slovensko.sk → Na stiahnutie</a>
+    (например, Gemalto IDBridge CT30, ACS ACR38, SCM SCR3310). Цена ≈ 15–30 €,
+    продаются в Alza, Nay, Mall, на amazon.de.
+  </li>
+  <li>
+    <strong>Компьютер с Windows, macOS или Linux.</strong> Все нужные программы
+    бесплатные и официальные.
+  </li>
+  <li>
+    <strong>Свободные ~30 минут</strong> и стабильный интернет.
+  </li>
+</ol>
+
+<h2 id="software">Шаг 1. Установить программы</h2>
+<p>
+  Все установщики берутся с официального портала Министерства внутренних дел
+  Словакии: <a href="https://eidas.minv.sk/download/" target="_blank">eidas.minv.sk/download</a>.
+  Скачайте и установите по очереди (порядок важен):
+</p>
+
+<ol>
+  <li>
+    <strong>Ovládač pre čítačku čipových kariet</strong> — драйвер для вашего
+    картридера (Windows/macOS/Linux).
+  </li>
+  <li>
+    <strong>eID klient</strong> — основное приложение: подключение к карте,
+    ввод BOK, авторизация на государственных порталах.
+  </li>
+  <li>
+    <strong>Aplikácia pre kvalifikovaný elektronický podpis (D.Signer/XAdES,
+      QES Web Signer)</strong> — модуль, который собственно подписывает
+    документы.
+  </li>
+  <li>
+    <strong>Aplikácia pre eID — eID Manager</strong> — нужна, чтобы
+    инициализировать сертификаты КЭП на чипе и установить KEP-PIN/PUK.
+  </li>
+</ol>
+
+<p>После установки <strong>перезагрузите компьютер</strong>.</p>
+
+<div class="note-box">
+  <p>
+    <strong>macOS.</strong> Установщики не подписаны Apple — при первом запуске
+    разрешите запуск в <em>System Settings → Privacy &amp; Security</em>. Иногда
+    нужно отдельно дать доступ <em>Input Monitoring</em> для eID klient.
+  </p>
+</div>
+
+<h2 id="check-card">Шаг 2. Проверить карту и BOK</h2>
+<ol>
+  <li>Подключите картридер, вставьте карту чипом к контактам.</li>
+  <li>Запустите <strong>eID klient</strong>.</li>
+  <li>В меню выберите «<em>Prihlásiť sa na portál</em>» и попробуйте войти на
+    <a href="https://www.slovensko.sk" target="_blank">slovensko.sk</a> — введите BOK.
+    Если вход прошёл, карта читается и BOK активен.
+  </li>
+</ol>
+
+<p>
+  Если вход не получается («zlý BOK»), у вас есть 5 попыток до блокировки.
+  После блокировки BOK разблокируется только в отделе документов полиции
+  (<em>oddelenie dokladov</em>) с PUK-конвертом, который выдавали при
+  получении карты.
+</p>
+
+<h2 id="activate-certs">Шаг 3. Активировать сертификаты КЭП на чипе</h2>
+<p>
+  По умолчанию чип карты содержит «болванки» сертификатов — их нужно
+  сгенерировать и подписать у Národný bezpečnostný úrad (NBÚ).
+</p>
+
+<ol>
+  <li>Запустите <strong>eID klient</strong>, в правом нижнем углу нажмите на иконку и выберите
+    «<em>Inicializácia občianskeho preukazu pre použitie KEP</em>».
+  </li>
+  <li>Введите <strong>BOK</strong> для авторизации.</li>
+  <li>Программа предложит установить <strong>KEP PIN</strong> (6 цифр — будет
+    запрашиваться при каждом подписании документа) и <strong>KEP PUK</strong>
+    (8 цифр — для разблокировки PIN после 5 неверных вводов). Запишите оба и
+    храните отдельно от карты.
+  </li>
+  <li>Нажмите «<em>Vyžiadať certifikát</em>» — клиент сгенерирует ключевую пару
+    прямо на чипе и отправит запрос в NBÚ. Через 1–2 минуты сертификаты будут
+    записаны на карту.
+  </li>
+  <li>В конце программа покажет статус «<em>Certifikáty boli úspešne nahraté na
+      čipe</em>». КЭП готов к использованию.
+  </li>
+</ol>
+
+<div class="note-box">
+  <p>
+    <strong>Если кнопки «Inicializácia» нет</strong> — обновите eID klient до
+    последней версии. На очень новых картах инициализация может быть уже
+    выполнена в полиции при выдаче — тогда сразу переходите к подписанию.
+  </p>
+</div>
+
+<h2 id="first-sign">Шаг 4. Первое подписание документа</h2>
+<p>Проверим, что КЭП работает, на простом PDF-файле:</p>
+<ol>
+  <li>Откройте <a href="https://www.slovensko.sk/sk/elektronicke-sluzby/zarucena-konverzia"
+      target="_blank">slovensko.sk</a>
+    и в верхнем меню выберите <em>Podpísať dokument</em>, либо запустите
+    локальный D.Signer/QES Web Signer.
+  </li>
+  <li>Выберите PDF, который хотите подписать.</li>
+  <li>Программа предложит выбрать сертификат — выберите «<em>SVK eID ACA</em>»
+    (квалифицированный сертификат от NBÚ).
+  </li>
+  <li>Введите <strong>KEP PIN</strong>.</li>
+  <li>Сохраните файл с расширением <code>.asice</code> (или <code>.pdf</code>
+    с встроенной подписью, в зависимости от формата). Это и есть документ,
+    подписанный КЭП.
+  </li>
+</ol>
+
+<h2 id="renewal">Срок действия и продление</h2>
+<p>
+  Сертификаты КЭП действуют <strong>5 лет</strong> или до конца срока действия
+  карты ВНЖ/občiansky — что наступит раньше. Продление делается тем же
+  мастером «<em>Inicializácia… pre použitie KEP</em>» — данные на чипе
+  перезаписываются, KEP PIN можно оставить прежним.
+</p>
+
+<p>
+  При замене карты (новая ВНЖ, потеря) сертификаты автоматически
+  аннулируются — нужно повторить активацию на новой карте.
+</p>
+
+<h2 id="troubleshooting">Частые проблемы</h2>
+
+<h3 id="reader-not-found">Картридер не определяется</h3>
+<ul>
+  <li>Установите драйвер именно для вашей модели (с сайта производителя или с
+    eidas.minv.sk).
+  </li>
+  <li>На macOS проверьте, что в <em>Privacy &amp; Security</em> разрешён eID
+    klient.
+  </li>
+  <li>Попробуйте другой USB-порт (желательно USB-A напрямую, без хабов).</li>
+</ul>
+
+<h3 id="cert-error">«Certifikát nie je možné použiť»</h3>
+<ul>
+  <li>Сертификаты не активированы — вернитесь к шагу 3.</li>
+  <li>Срок действия истёк — продлите через ту же инициализацию.</li>
+  <li>Карта повреждена или чип отказал — нужна замена в полиции.</li>
+</ul>
+
+<h3 id="bok-blocked">BOK заблокирован</h3>
+<p>
+  Идите в <em>oddelenie dokladov</em> с картой и PUK-конвертом. Разблокировка
+  бесплатная. Если PUK потерян — карту перевыпускают (~17 €).
+</p>
+
+<h2 id="useful-links">Полезные ссылки</h2>
+<ul>
+  <li>
+    <a href="https://eidas.minv.sk/download/" target="_blank">eidas.minv.sk/download</a> — все официальные программы для
+    КЭП.
+  </li>
+  <li>
+    <a href="https://www.slovensko.sk/sk/na-stiahnutie" target="_blank">slovensko.sk → Na stiahnutie</a> — список
+    совместимых картридеров и инструкции.
+  </li>
+  <li>
+    <a href="https://www.nbu.gov.sk/" target="_blank">Národný bezpečnostný úrad (NBÚ)</a> — удостоверяющий центр,
+    выпускающий сертификаты.
+  </li>
+  <li>
+    <a href="https://www.info-slovakia.com/2025/01/24/%D0%BA%D0%B0%D0%BA-%D0%B0%D0%BA%D1%82%D0%B8%D0%B2%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D1%82%D1%8C-eid-%D0%B2-%D1%81%D0%BB%D0%BE%D0%B2%D0%B0%D0%BA%D0%B8%D0%B8/"
+      target="_blank">info-slovakia.com — пошаговая инструкция по активации eID</a>
+  </li>
+  <li>
+    <a href="https://ti-capital.sk/ru/gaid-kak-poluchit-elektronnuyu-podpis/" target="_blank">ti-capital.sk — гайд по
+      получению электронной подписи</a>
+  </li>
+  <li>
+    <a href="https://www.youtube.com/watch?v=xxrHBsb7MRY" target="_blank">Видеоинструкция на YouTube</a>
+  </li>
+  <li>
+    <a href="https://www.facebook.com/groups/zakonyslovakii/posts/1318071570218527/" target="_blank">Обсуждение в группе
+      «Законы Словакии» на Facebook</a>
+  </li>
+</ul>

@@ -913,3 +913,20 @@ th {
   color: var(--muted);
   font-family: var(--font-mono, monospace);
 }
+
+/* Callout boxes */
+.note-box {
+  background: var(--callout-warn-bg);
+  border-left: 4px solid var(--callout-warn-bar);
+  padding: 1rem;
+  margin: 1.5rem 0;
+  border-radius: 0 4px 4px 0;
+}
+
+.address-box {
+  background: var(--panel);
+  border-left: 4px solid var(--accent);
+  padding: 1rem;
+  margin: 1.5rem 0;
+  border-radius: 0 4px 4px 0;
+}
